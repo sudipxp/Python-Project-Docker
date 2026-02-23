@@ -1,0 +1,54 @@
+# Docker Compose file for Python API Application
+# This file defines the services for the Python API Application
+# It includes the MySQL database and the Python application
+# The MySQL database is used to store the data for the application
+# The Python application is used to serve the API
+# The application is built using the Dockerfile
+# The application is run using the docker-compose up command
+# The application is accessible at http://localhost:8000
+# The MySQL database is accessible at http://localhost:3306
+# The MySQL database is used to store the data for the application 
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: app_db
+      MYSQL_USER: app_user
+      MYSQL_PASSWORD: app_password
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - mysql_data:/var/lib/mysql 
+    networks:
+      - app-network # Network for the application
+      
+  pyhton-app:
+    build: .
+    container_name: python-app
+    ports:
+      - 8000:8000
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: app_user
+      DB_PASSWORD: app_password
+      DB_NAME: app_db
+    depends_on:
+      mysql:
+        condition: service_healthy # Wait for the MySQL database to be healthy before starting the Python application
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
