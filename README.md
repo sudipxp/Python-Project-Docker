@@ -11,35 +11,6 @@ A modern REST API application built with FastAPI.
 - RESTful endpoints for CRUD operations
 - Health check endpoint
 
-## Setup
-
-### Prerequisites
-
-- Python 3.8 or higher
-- pip (Python package manager)
-
-### Installation
-
-1. Create a virtual environment (recommended):
-```bash
-python -m venv venv
-```
-
-2. Activate the virtual environment:
-   - On Windows:
-     ```bash
-     venv\Scripts\activate
-     ```
-   - On macOS/Linux:
-     ```bash
-     source venv/bin/activate
-     ```
-
-3. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
 ## Running the Application
 
 ### Development Server
@@ -196,6 +167,4 @@ curl -X DELETE "http://localhost:8000/items/1"
 - Add environment configuration
 - Deploy to production (Docker, cloud services, etc.)
 
-## License
 
-MIT
