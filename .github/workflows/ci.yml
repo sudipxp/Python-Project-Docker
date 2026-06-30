@@ -1,5 +1,18 @@
-# Roll of this Workflow is to build ci process
-
 name: CI
 
-on:
+on: workflow_dispatch
+
+jobs:
+  sonar-cube:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Code checkout
+        uses: actions/checkout@v7
+    
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        
