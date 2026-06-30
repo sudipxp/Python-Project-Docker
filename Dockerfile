@@ -1,7 +1,7 @@
 # Dockerfile for Python API Application
 
 # Build the Docker image
-FROM python:3.10-slim
+FROM python:3.12-alpine
 
 # Set the working directory in the container
 WORKDIR /app
